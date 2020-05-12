@@ -8,7 +8,8 @@ var helmet = require('helmet');
 
 // Sets up mongoose
 var mongoose = require('mongoose');
-var mongoDB = 'mongodb+srv://sorchon:vRYv3uUJGbKHqIVN@cluster0-bg4x2.mongodb.net/local_library?retryWrites=true&w=majority';
+var db_url = 'mongodb+srv://sorchon:vRYv3uUJGbKHqIVN@cluster0-bg4x2.mongodb.net/local_library?retryWrites=true&w=majority';
+var mongoDB = process.env.MONGODB_URI || db_url;
 mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true});
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error: '));
