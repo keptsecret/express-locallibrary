@@ -1,0 +1,23 @@
+extends layout
+
+block content
+  h1 #{title}: #{copy.name}
+  p #{copy.imprint}
+  p 
+    if copy.status=='Available'
+      span.text-success #{copy.status}
+    else if copy.status=='Maintenance'
+      span.text-danger #{copy.status}
+    else
+      span.text-warning #{copy.status} 
+      
+  if copy.status!='Available'
+    p #{copy.due_back_formatted}
+
+  p #[strong Do you really want to delete this copy?]
+
+  form(method='POST' action='')
+    div.form-group
+      input#copyid.form-control(type='hidden' name='copyid' required='true' value=copy._id)
+
+    button.btn.btn-primary(type='submit') Delete
